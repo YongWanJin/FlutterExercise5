@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
+
+  void onLoginTap(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +36,14 @@ class SignUpScreen extends StatelessWidget {
                 style: TextStyle(fontSize: Sizes.size16, color: Colors.black45),
                 textAlign: TextAlign.center,
               ),
+              Gaps.v40,
+              AuthButton(text: "Use phone or Email"),
+              AuthButton(text: "Continue with Apple"),
             ],
           ),
         ),
       ),
+
       // * 하단 바 (Login) * //
       bottomNavigationBar: Container(
         // 상단 그림자 경계선
@@ -46,7 +58,6 @@ class SignUpScreen extends StatelessWidget {
         ),
         // 하단 바 내용물
         child: BottomAppBar(
-          elevation: 1,
           color: Colors.grey.shade100,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
@@ -55,11 +66,14 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Text("Aleary have an account?"),
                 Gaps.h5,
-                Text(
-                  "Log in",
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () => onLoginTap(context),
+                  child: Text(
+                    "Log in",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],
