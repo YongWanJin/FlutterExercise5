@@ -64,6 +64,19 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void _toggleObsecureText() {
     _obsecureText = !_obsecureText;
     setState(() {});
+    // * 궁금증 : setState()의 매개변수 부분이 비어있는데 어떻게 동작하는가?
+    // setState()의 핵심 기능은 해당 State를 다시 빌드(build)하라는 명령어다.
+    // 어떤 값이 변경되었는지는 setState()의 매개변수 밖에 작성해도 된다.
+    // setState()의 매개변수가 콜백 함수의 형태를 띄는 이유는 가독성을 높이고 오류를 체크할 수 있기 때문이다.
+    // 어떤 부분이 변경되었기 때문에 이 State를 다시 빌드해야하는지를 명시적으로 보여줄 수 있고,
+    // setState()의 매개변수로 Future를 반환하는 async함수가 오지는 않았는지를 검사할 수 있다.
+    // setState()의 매개변수로 비동기 함수가 오면 안되는 이유로는 setState()의 목적과 맞지 않기 때문이다.
+    // 비동기적으로 변경되는 부분은 setState() 외부에 작성해야 한다.
+    // setState()는 실행되자마자 해당 State를 다시 빌드한다.
+    // 하지만 비동기로 된 콜백 함수 내부에서 await 키워드를 만나면,
+    // 그 이후에 작성된 명령어에서 변경된 사항은 다시 빌드된 State에 반영되지 않는다.
+    // 또한 await 키워드를 만나 대기하는 동안에 사용자가 해당 State를 종료해버린다면(dispose()함수가 실행된다면)
+    // 이미 죽은 State 객체의 필드를 건드리게되는 위험성도 존재한다.
   }
 
   @override
