@@ -93,8 +93,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
         height: 300,
         child: SizedBox(
           child: CupertinoDatePicker(
-            maximumDate: initialDate, // 코드 챌린지 : 12세 이상 이용가를 가정하여 12년전 날짜로 설정하기
-            initialDateTime: initialDate,
+            maximumDate: initialDate.subtract(
+              Duration(days: 4382),
+            ), // 12세 이상 이용가를 가정하여 12년전 날짜로 설정
+            initialDateTime: initialDate.subtract(Duration(days: 4382)),
             mode: CupertinoDatePickerMode.date,
             onDateTimeChanged: _setTextFieldDate,
           ),
