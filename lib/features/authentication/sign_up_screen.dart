@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
+  void _onLoginTap(BuildContext context) {
     Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    // print("_onLoginTap 호출");
+  }
+
+  void _onEamilTap(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => UsernameScreen()));
+    // print("_onEamilTap 호출");
   }
 
   @override
@@ -39,11 +49,13 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.v40,
               AuthButton(
+                gesture: () => _onEamilTap(context),
                 icon: FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password",
               ),
               Gaps.v16,
               AuthButton(
+                gesture: () {},
                 icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
               ),
@@ -75,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
                 Text("Aleary have an account?"),
                 Gaps.h5,
                 GestureDetector(
-                  onTap: () => onLoginTap(context),
+                  onTap: () => _onLoginTap(context),
                   child: Text(
                     "Log in",
                     style: TextStyle(
