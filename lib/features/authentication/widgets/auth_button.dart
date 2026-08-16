@@ -6,6 +6,7 @@ class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
   final GestureTapCallback gesture;
+  // typedef GestureTapCallback = void Function();
 
   const AuthButton({
     super.key,
