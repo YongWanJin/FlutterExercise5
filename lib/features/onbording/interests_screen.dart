@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/onbording/tutorial_screen.dart';
 import 'package:tiktok_clone/features/onbording/widgets/interests.dart';
 
 const interests = [
@@ -80,13 +81,17 @@ class _InterestsScreenState extends State<InterestsScreen> {
     super.dispose();
   }
 
+  void _onNextTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TutorialScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.white,
-        // foregroundColor: Colors.white,
-        // title: Text("Choose your interests"),
         title: AnimatedOpacity(
           opacity: _showTitle ? 1 : 0,
           duration: Duration(microseconds: 300),
@@ -147,13 +152,16 @@ class _InterestsScreenState extends State<InterestsScreen> {
             left: Sizes.size24,
             right: Sizes.size24,
           ),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: Sizes.size14),
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-            child: Text(
-              "Next",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: Sizes.size16),
+          child: GestureDetector(
+            onTap: _onNextTap,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: Sizes.size14),
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              child: Text(
+                "Next",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: Sizes.size16),
+              ),
             ),
           ),
         ),
