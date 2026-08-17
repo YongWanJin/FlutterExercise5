@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/features/onbording/interests_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -18,6 +19,7 @@ class TikTokApp extends StatelessWidget {
         primaryColor: Color(0xFFE9435A),
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
+          scrolledUnderElevation: 0,
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -28,7 +30,8 @@ class TikTokApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SignUpScreen(),
+      // home: SignUpScreen(),
+      home: InterestsScreen(),
     );
   }
 }

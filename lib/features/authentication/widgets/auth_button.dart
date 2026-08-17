@@ -7,6 +7,8 @@ class AuthButton extends StatelessWidget {
   final FaIcon icon;
   final GestureTapCallback gesture;
   // typedef GestureTapCallback = void Function();
+  // 일반적으로 GestureDetector를 버튼 위젯 안에 넣는 것을 추천한다.
+  // 버튼을 생성할때마다 매번 GestureDetector로 감싸는 것을 잊는 실수를 방지할 수 있기 때문이다.
 
   const AuthButton({
     super.key,
