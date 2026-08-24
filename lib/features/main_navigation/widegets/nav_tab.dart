@@ -16,13 +16,13 @@ class NavTab extends StatelessWidget {
   final bool isSelected;
   final IconData icon;
   final IconData selectedIcon;
-  final Function onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: () => onTap(),
+        onTap: onTap,
         child: Container(
           color: Colors.black,
           child: AnimatedOpacity(
