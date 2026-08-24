@@ -70,7 +70,7 @@ class NavTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: onTap),
+        onTap: onTap,
         // 이하 생략
       ),
     );
