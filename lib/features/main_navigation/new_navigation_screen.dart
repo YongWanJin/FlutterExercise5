@@ -16,6 +16,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
   bool _isSelected = false;
+  LongPressStartDetails details = LongPressStartDetails();
 
   void _onTap(int index) {
     setState(() {
@@ -96,14 +97,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _selectedIndex == 1,
                 onTap: () => _onTap(1),
               ),
-              Gaps.h24,
-              GestureDetector(
-                onTap: _onPostVideoButtonTap,
-                onLongPressStart: _onPosetVideoLogPresss,
-                onLongPressEnd: _onPosetVideoLogPresssEnd,
-                child: PostVideoButton(isSelected: _isSelected),
+              PostVideoButton(
+                isSelected: _isSelected,
+                onTap: () => _onPostVideoButtonTap(),
+                onLongPress: () => _onPosetVideoLogPresss(details),
+                onLongPressEnd: (gesture) => _onPosetVideoLogPresssEnd(gesture),
               ),
-              Gaps.h24,
               NavTab(
                 text: "Inbox",
                 icon: FontAwesomeIcons.message,
