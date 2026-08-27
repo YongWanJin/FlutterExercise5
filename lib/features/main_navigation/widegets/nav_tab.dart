@@ -14,8 +14,8 @@ class NavTab extends StatelessWidget {
 
   final String text;
   final bool isSelected;
-  final IconData icon;
-  final IconData selectedIcon;
+  final FaIconData icon;
+  final FaIconData selectedIcon;
   final VoidCallback onTap;
 
   @override

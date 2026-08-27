@@ -179,3 +179,52 @@ class _PostVideoButtonState extends State<PostVideoButton> {
 #### 해결책 2
 
 * ```PostVideoButton```이 더 확실하게 옆에 있는 ```NavTab```들에게 영향을 받지 않고 자유롭게 공간을 차지하고 싶다면 new_navigation_screen.dart에서 ```PostVideoButton```와  ```NavTab```의 선언 순서를 ```Stack```을 통해 약간 바꿔주면 된다. 
+
+<br>
+
+## 2026.08.28.
+
+### pubspec.yaml 설정에 관하여
+
+#### 증상
+
+* lib/features/videos/widgets/video_post.dart에 있는 코드 중 다음 부분에서 해당 에러 메시지가 발생하며 assets/videos에 들어있는 영상 파일을 불러오지 못하고 앱이 강제 종료되었다.
+
+```dart
+  void _initViedoPlayer() async {
+    await _videoPlayerController.initialize();  // 에러가 발생한 부분
+    _videoPlayerController.play();
+    setState(() {});
+  }
+```
+
+```
+PlatformException (PlatformException(VideoError, Video player had error androidx.media3.exoplayer.ExoPlaybackException: Source error, null, null))
+```
+
+#### 원인
+
+* pubspec.yaml에서 ```assets``` 항목의 들여쓰기가 잘못되어, flutter에서 영상이 들어있는 파일을 인식하지 못했다.
+
+```yaml
+flutter:
+  uses-material-design: true
+assets:
+  - assets/videos/
+```
+
+#### 해결책
+
+* ```assets``` 항목을 ```flutter``` 항목 아래에 위치할 수 있게 들여쓰기 한다. 
+
+```yaml
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/videos/
+```
+
+
+
+
+

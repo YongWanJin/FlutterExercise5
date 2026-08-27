@@ -5,6 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/main_navigation/widegets/detail_navigation_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/widegets/nav_tab.dart';
 import 'package:tiktok_clone/features/main_navigation/widegets/post_video_button.dart';
+import 'package:tiktok_clone/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -57,22 +58,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          Offstage(
-            offstage: _selectedIndex != 0,
-            child: DetailNavigationScreen(),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 1,
-            child: DetailNavigationScreen(),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 3,
-            child: DetailNavigationScreen(),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 4,
-            child: DetailNavigationScreen(),
-          ),
+          Offstage(offstage: _selectedIndex != 0, child: VideoTimelineScreen()),
+          Offstage(offstage: _selectedIndex != 1, child: Container()),
+          Offstage(offstage: _selectedIndex != 3, child: Container()),
+          Offstage(offstage: _selectedIndex != 4, child: Container()),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
