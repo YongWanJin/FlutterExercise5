@@ -39,7 +39,7 @@ class _VideoPostState extends State<VideoPost> {
   void dispose() {
     _videoPlayerController.dispose();
     super.dispose();
-    widget.onVideoFinished();
+    // widget.onVideoFinished();
   }
 
   @override

@@ -9,7 +9,7 @@ class VideoTimelineScreen extends StatefulWidget {
 }
 
 class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
-  final int _itemCount = 3;
+  final int _itemCount = 5;
 
   final PageController _pageController = PageController();
   final Duration scrollDuration = const Duration(milliseconds: 150);

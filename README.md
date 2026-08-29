@@ -224,6 +224,64 @@ flutter:
     - assets/videos/
 ```
 
+<br>
+
+## 2026.08.30.
+
+###
+
+#### 증상
+
+* 첫번째 동영상에서 다음 동영상으로 넘어갈 때 모두 건너뛰고 마지막 동영상이 재생되는 문제가 발생했다.
+
+#### 가설 1
+
+* 동영상이 끝났을 때 동작하는 함수에 무언가 이상이 있을 것이다. 동영상이 끝났을 때에 동작하는 함수를 찾아서 잘 살펴보자.
+
+#### 원인
+
+* lib/features/videos/widgets/video_post.dart에서 ```_videoPlayerController```의 생명주기를 끝내는 함수 ```dispose()``` 부분을 눈여겨 보자.
+
+```dart
+
+  void _onVideoChange() {
+    if (_videoPlayerController.value.isInitialized) {
+      if (_videoPlayerController.value.duration ==
+          _videoPlayerController.value.position) {
+        widget.onVideoFinished();
+        // 재생 중인 동영상의 전체 길이와 현재 재생 위치가 같으면,
+        // 그러니까 재생 중인 동영상 재생이 모두 끝나면,
+        // onVideoFinished() 함수를 실행시킨다.
+      }
+    }
+  }
+
+  void _initViedoPlayer() async {
+    await _videoPlayerController.initialize();
+    _videoPlayerController.play();
+    setState(() {});
+    _videoPlayerController.addListener(_onVideoChange);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initViedoPlayer();
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
+    widget.onVideoFinished();
+  }
+```
+
+* 이미 ```_onVideoChange()```에서 ```onVideoFinished()```를 동작하도록 되어있다. 그런데 ```dispose()``` 함수에서 다시 한 번 ```onVideoFinished()```가 동작한다. 동영상 재생이 모두 끝났을 때 동작할 함수가 두번 동작하는 것이다. 그래서 다음 동영상으로 넘어갔을 때 재생되지 않고 곧바로 끝나버리는 것이다.
+
+#### 해결책
+
+* ```dispose()``` 함수에 들어있는 코드 ```widget.onVideoFinished()```를 삭제한다.
 
 
 
