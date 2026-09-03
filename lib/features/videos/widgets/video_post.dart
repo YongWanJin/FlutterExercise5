@@ -19,12 +19,20 @@ class VideoPost extends StatefulWidget {
 
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
+  // SingleTickerProviderStateMixin : 애니메이션 효과가 적용된 위젯이 화면에 등장하거나
+  // 그 위젯의 애니메이션이 재생될 때에만
+  // ticker (매 프레임마다 신호를 주는 장치)를 활성화시키는 기능을 담은 Mixin.
+  // AnimationController를 여러개 쓴다면 TickerProvicderStateMixin을 사용하면 된다.
+
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/a.mp4");
 
   bool _isPaused = false;
 
   late final AnimationController _animationController;
+  // Flutter의 애니메이션은 변화가 일어날때마다 화면을 다시 build하는 방식으로 구현된다.
+  // _animationController.addListener()에 콜백 함수로 Setstate()를 넣거나
+  // AnitaedBuilder를 사용해서 애니메이션을 실제로 적용한다.
 
   final Duration _animationDuration = Duration(milliseconds: 200);
 
@@ -39,6 +47,7 @@ class _VideoPostState extends State<VideoPost>
 
   void _initViedoPlayer() async {
     await _videoPlayerController.initialize();
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
@@ -54,6 +63,8 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5,
       duration: _animationDuration,
     );
+
+    // 이 코드는 AnimatedBuilder으로 대체함.
     // _animationController.addListener(() {
     //   setState(() {});
     // });
