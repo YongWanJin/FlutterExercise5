@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/body_text.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -161,6 +162,26 @@ class _VideoPostState extends State<VideoPost>
                 BodyText(
                   text: "#AI생성 #모비노기 수영장에서 물장구를 치는 우리집 딸래미가 너무너무 귀엽다. 정말로 한가해 보인다. 옆자리에 마실 것을 가져다 주고 싶다.",
                 ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  foregroundImage: AssetImage("assets/images/myFace.PNG"),
+                ),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidComment, text: "33K"),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.share, text: "Share"),
               ],
             ),
           ),
