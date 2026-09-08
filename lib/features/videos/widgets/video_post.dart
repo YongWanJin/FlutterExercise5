@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/body_text.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -25,7 +27,7 @@ class _VideoPostState extends State<VideoPost>
   // AnimationController를 여러개 쓴다면 TickerProvicderStateMixin을 사용하면 된다.
 
   final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset("assets/videos/a.mp4");
+      VideoPlayerController.asset("assets/videos/e.mp4");
 
   bool _isPaused = false;
 
@@ -134,6 +136,32 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            left: 30,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "@yongwan_Jin",
+                  style: TextStyle(
+                    fontSize: Sizes.size20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Gaps.v10,
+                Text(
+                  "물장구 치는 딸래미",
+                  style: TextStyle(fontSize: Sizes.size16, color: Colors.white),
+                ),
+                Gaps.v6,
+                BodyText(
+                  text: "#AI생성 #모비노기 수영장에서 물장구를 치는 우리집 딸래미가 너무너무 귀엽다. 정말로 한가해 보인다. 옆자리에 마실 것을 가져다 주고 싶다.",
+                ),
+              ],
             ),
           ),
         ],
