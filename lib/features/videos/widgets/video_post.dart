@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/body_text.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -99,6 +100,19 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
+  void _onCommentsTap(BuildContext context) async {
+    if (_videoPlayerController.value.isPlaying) {
+      _onTogglePause();
+    }
+    await showModalBottomSheet(
+      context: context,
+      builder: (context) => VideoComments(),
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+    );
+    _onTogglePause();
+  }
+
   @override
   Widget build(BuildContext context) {
     // print(_animationController.value);
@@ -171,17 +185,33 @@ class _VideoPostState extends State<VideoPost>
             child: Column(
               children: [
                 CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  foregroundImage: AssetImage("assets/images/myFace.PNG"),
+                  radius: 27,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    foregroundImage: AssetImage("assets/images/myFace.PNG"),
+                  ),
                 ),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: "2.9M",
+                  onTap: () {},
+                ),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.solidComment, text: "33K"),
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: "33K",
+                  onTap: () => _onCommentsTap(context),
+                ),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.share, text: "Share"),
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: "Share",
+                  onTap: () {},
+                ),
               ],
             ),
           ),

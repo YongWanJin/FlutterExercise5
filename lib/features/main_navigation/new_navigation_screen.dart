@@ -56,6 +56,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     /// 커스텀 디자인 버전 하단 바
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Offstage(offstage: _selectedIndex != 0, child: VideoTimelineScreen()),

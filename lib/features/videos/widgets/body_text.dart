@@ -29,7 +29,7 @@ class _BodyTextState extends State<BodyText> {
     return GestureDetector(
       onTap: _onSeeMoreTap,
       child: _seeMore
-          ? SizedBox(width: 365, child: Text(widget.text, style: bodyTextStyle))
+          ? SizedBox(width: 310, child: Text(widget.text, style: bodyTextStyle))
           : Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
