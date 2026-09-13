@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/constants/sizes.dart';
+
+final tabs = ["Top", "Users", "Videos", "Sounds", "LIVE", "Shopping", "Brands"];
 
 class DiscoverScreen extends StatelessWidget {
   const DiscoverScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Discover")));
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Discover"),
+          bottom: TabBar(
+            tabAlignment: TabAlignment.start,
+            splashFactory: NoSplash.splashFactory,
+            padding: EdgeInsets.symmetric(horizontal: Sizes.size16),
+            isScrollable: true,
+            labelStyle: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: Sizes.size16,
+            ),
+            indicatorColor: Colors.black,
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey.shade500,
+            tabs: [for (var tab in tabs) Tab(child: Text(tab))],
+          ),
+        ),
+        body: TabBarView(
+          children: [for (var tab in tabs) Center(child: Text(tab))],
+        ),
+      ),
+    );
   }
 }
