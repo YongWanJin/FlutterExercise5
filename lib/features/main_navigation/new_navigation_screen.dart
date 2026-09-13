@@ -67,7 +67,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         height: 86,
-        color: Colors.black,
+        color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
           child: Row(
@@ -79,6 +79,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidHouse,
                 isSelected: _selectedIndex == 0,
                 onTap: () => _onTap(0),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: "Discover",
@@ -86,12 +87,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 isSelected: _selectedIndex == 1,
                 onTap: () => _onTap(1),
+                selectedIndex: _selectedIndex,
               ),
               PostVideoButton(
                 isSelected: _isSelected,
                 onTap: () => _onPostVideoButtonTap(),
                 onLongPress: () => _onPosetVideoLogPresss(details),
                 onLongPressEnd: (gesture) => _onPosetVideoLogPresssEnd(gesture),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: "Inbox",
@@ -99,6 +102,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidMessage,
                 isSelected: _selectedIndex == 3,
                 onTap: () => _onTap(3),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: "Profile",
@@ -106,6 +110,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidUser,
                 isSelected: _selectedIndex == 4,
                 onTap: () => _onTap(4),
+                selectedIndex: _selectedIndex,
               ),
             ],
           ),

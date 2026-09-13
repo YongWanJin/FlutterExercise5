@@ -80,10 +80,17 @@ class _VideoPostState extends State<VideoPost>
     super.dispose();
   }
 
-  /// 영상 화면이 완전히 노출될 때 영상을 재생함
+  /// Home에서 재생될 영상이 화면에 노출되는 정도에 따라서 재생할지 말지 여부를 결정
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    // 아래로 넘긴 영상이 화면에 100% 노출되었을 때에만 재생
+    if (info.visibleFraction == 1 &&
+        !_isPaused &&
+        !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
+    }
+    // bottom navigation tap에서 다른 탭으로 넘어갈 때에는 중지
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _onTogglePause();
     }
   }
 

@@ -9,12 +9,14 @@ class PostVideoButton extends StatefulWidget {
     required this.onTap,
     required this.onLongPress,
     required this.onLongPressEnd,
+    required this.selectedIndex,
   });
 
   final bool isSelected;
   final VoidCallback onTap;
   final VoidCallback onLongPress;
   final GestureLongPressEndCallback onLongPressEnd;
+  final int selectedIndex;
 
   @override
   State<PostVideoButton> createState() => _PostVideoButtonState();
@@ -57,15 +59,21 @@ class _PostVideoButtonState extends State<PostVideoButton> {
             AnimatedContainer(
               height: 30,
               width: 48,
-              duration: Duration(milliseconds: 200),
+              duration: Duration(milliseconds: 100),
               decoration: BoxDecoration(
-                color: widget.isSelected ? Colors.amber : Colors.white,
+                color: widget.isSelected
+                    ? Colors.amber
+                    : widget.selectedIndex == 0
+                    ? Colors.white
+                    : Colors.black,
                 borderRadius: BorderRadius.circular(Sizes.size6),
               ),
               child: Center(
                 child: FaIcon(
                   FontAwesomeIcons.plus,
-                  color: Colors.black,
+                  color: widget.selectedIndex == 0
+                      ? Colors.black
+                      : Colors.white,
                   size: 18,
                 ),
               ),
