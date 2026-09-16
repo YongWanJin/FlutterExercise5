@@ -287,7 +287,7 @@ flutter:
 
 ## 2026.09.04
 
-### 영상 설명란의 GestureDetector가 작동하지 않음
+### 변수에 변화가 생기면 반드시 setState()를 사용하라!
 
 #### 증상
 
@@ -321,7 +321,58 @@ void _onSeeMoreTap() {
 }
 ```
 
+<br>
 
+## 2026.09.16
+
+### TabBarView 사용시 주의점
+
+#### 증상
+
+* lib/features/discover/discover_screen.dart 코드를 복습하던 도중, TabBarView 위젯만 입력하면 flutter 앱 자체가 부팅이 되지 않았다. TabBarView 위젯 부분을 테스트 용으로 아무리 간단하게 작성해도 앱 자체가 부팅이 되지 않는 문제가 발생했다. 다음은 내가 당시에 작성했던 코드이다.
+
+```Dart
+final tabs = ["Top", "Users", "Videos", "Sounds", "LIVE", "Shopping", "Brands"];
+
+// 중략 //
+
+class _DiscoverScreenState extends State<DiscoverScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Discover"),
+          bottom: TabBar(
+            // 중략 //
+            tabs: [
+              for (var tab in tabs)
+                Tab(
+                  child: Text(tab, style: TextStyle(fontSize: Sizes.size16)),
+                ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Center(child: Text("asaaa")),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+#### 원인
+
+* TabBarView 위젯의 children의 개수가 DefaultTabController의 length와 맞지 않았기 때문이다. 탭은 7개가 존재하므로 보여줄 화면도 7개가 필요하다. 하지만 위의 경우에는 하나의 화면만 준비되어 있었다. 
+
+#### 해결책
+
+* TabBarView 위젯의 children의 개수도 7개로 맞춰준다.
 
 
 
