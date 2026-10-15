@@ -73,47 +73,58 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
-              NavTab(
-                text: "Home",
-                icon: FontAwesomeIcons.house,
-                selectedIcon: FontAwesomeIcons.solidHouse,
-                isSelected: _selectedIndex == 0,
-                onTap: () => _onTap(0),
-                selectedIndex: _selectedIndex,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  NavTab(
+                    text: "Home",
+                    icon: FontAwesomeIcons.house,
+                    selectedIcon: FontAwesomeIcons.solidHouse,
+                    isSelected: _selectedIndex == 0,
+                    onTap: () => _onTap(0),
+                    selectedIndex: _selectedIndex,
+                  ),
+                  NavTab(
+                    text: "Discover",
+                    icon: FontAwesomeIcons.compass,
+                    selectedIcon: FontAwesomeIcons.solidCompass,
+                    isSelected: _selectedIndex == 1,
+                    onTap: () => _onTap(1),
+                    selectedIndex: _selectedIndex,
+                  ),
+                  Expanded(child: SizedBox()),
+                  NavTab(
+                    text: "Inbox",
+                    icon: FontAwesomeIcons.message,
+                    selectedIcon: FontAwesomeIcons.solidMessage,
+                    isSelected: _selectedIndex == 3,
+                    onTap: () => _onTap(3),
+                    selectedIndex: _selectedIndex,
+                  ),
+                  NavTab(
+                    text: "Profile",
+                    icon: FontAwesomeIcons.user,
+                    selectedIcon: FontAwesomeIcons.solidUser,
+                    isSelected: _selectedIndex == 4,
+                    onTap: () => _onTap(4),
+                    selectedIndex: _selectedIndex,
+                  ),
+                ],
               ),
-              NavTab(
-                text: "Discover",
-                icon: FontAwesomeIcons.compass,
-                selectedIcon: FontAwesomeIcons.solidCompass,
-                isSelected: _selectedIndex == 1,
-                onTap: () => _onTap(1),
-                selectedIndex: _selectedIndex,
-              ),
-              PostVideoButton(
-                isSelected: _isSelected,
-                onTap: () => _onPostVideoButtonTap(),
-                onLongPress: () => _onPosetVideoLogPresss(details),
-                onLongPressEnd: (gesture) => _onPosetVideoLogPresssEnd(gesture),
-                selectedIndex: _selectedIndex,
-              ),
-              NavTab(
-                text: "Inbox",
-                icon: FontAwesomeIcons.message,
-                selectedIcon: FontAwesomeIcons.solidMessage,
-                isSelected: _selectedIndex == 3,
-                onTap: () => _onTap(3),
-                selectedIndex: _selectedIndex,
-              ),
-              NavTab(
-                text: "Profile",
-                icon: FontAwesomeIcons.user,
-                selectedIcon: FontAwesomeIcons.solidUser,
-                isSelected: _selectedIndex == 4,
-                onTap: () => _onTap(4),
-                selectedIndex: _selectedIndex,
+              Positioned(
+                child: Center(
+                  child: PostVideoButton(
+                    isSelected: _isSelected,
+                    onTap: () => _onPostVideoButtonTap(),
+                    onLongPress: () => _onPosetVideoLogPresss(details),
+                    onLongPressEnd: (gesture) =>
+                        _onPosetVideoLogPresssEnd(gesture),
+                    selectedIndex: _selectedIndex,
+                  ),
+                ),
               ),
             ],
           ),

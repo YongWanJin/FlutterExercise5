@@ -80,46 +80,52 @@ class _DiscoverScreenState extends State<DiscoverScreen>
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          centerTitle: true,
           title: Padding(
             padding: EdgeInsets.symmetric(horizontal: Sizes.size16),
             child: SizedBox(
               height: 40,
-              child: TextField(
-                controller: _textEditingController,
-                onSubmitted: _onSubmitted,
-                onChanged: _onChanged,
-                decoration: InputDecoration(
-                  hintText: "Search",
-                  fillColor: Colors.grey.shade200,
-                  filled: true,
-                  contentPadding: EdgeInsets.only(top: Sizes.size4),
-                  focusedBorder: InputBorder.none,
-                  prefixIcon: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      FaIcon(
-                        FontAwesomeIcons.magnifyingGlass,
-                        size: Sizes.size20,
-                      ),
-                    ],
-                  ),
-                  suffix: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Sizes.size6),
-                        child: GestureDetector(
-                          onTap: _onClearTap,
-                          child: FaIcon(
-                            FontAwesomeIcons.solidCircleXmark,
-                            size: Sizes.size16,
-                            color: Colors.grey.shade600,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: Breakpoints.sm),
+                child: TextField(
+                  controller: _textEditingController,
+                  onSubmitted: _onSubmitted,
+                  onChanged: _onChanged,
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    fillColor: Colors.grey.shade200,
+                    filled: true,
+                    contentPadding: EdgeInsets.only(top: Sizes.size4),
+                    focusedBorder: InputBorder.none,
+                    prefixIcon: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.magnifyingGlass,
+                          size: Sizes.size20,
+                        ),
+                      ],
+                    ),
+                    suffix: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: Sizes.size6,
+                          ),
+                          child: GestureDetector(
+                            onTap: _onClearTap,
+                            child: FaIcon(
+                              FontAwesomeIcons.solidCircleXmark,
+                              size: Sizes.size16,
+                              color: Colors.grey.shade600,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -127,7 +133,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           ),
           bottom: TabBar(
             controller: _tabController,
-            tabAlignment: TabAlignment.start,
+            tabAlignment: TabAlignment.center,
             splashFactory: NoSplash.splashFactory,
             padding: EdgeInsets.symmetric(horizontal: Sizes.size16),
             isScrollable: true,
@@ -156,69 +162,72 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                 mainAxisSpacing: Sizes.size20,
                 childAspectRatio: 9 / 20,
               ),
-              itemBuilder: (context, index) => Column(
-                children: [
-                  Container(
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Sizes.size14),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 9 / 16,
-                      child: GestureDetector(
-                        onTap: _onImageTap,
-                        child: FadeInImage.assetNetwork(
-                          fit: BoxFit.cover,
-                          placeholder: "assets/images/1.PNG",
-                          image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              itemBuilder: (context, index) => LayoutBuilder(
+                builder: (context, constraints) => Column(
+                  children: [
+                    Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Sizes.size14),
+                      ),
+                      child: AspectRatio(
+                        aspectRatio: 9 / 16,
+                        child: GestureDetector(
+                          onTap: _onImageTap,
+                          child: FadeInImage.assetNetwork(
+                            fit: BoxFit.cover,
+                            placeholder: "assets/images/1.PNG",
+                            image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Gaps.v10,
-                  Text(
-                    "이것은 내가 업로드한 사진입니다. 아주아주 아름다운 사진입니다. 나는 이 사진에 대해 더 설명하고 싶습니다.",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: Sizes.size16,
-                      fontWeight: FontWeight.bold,
+                    Gaps.v10,
+                    Text(
+                      "이것은 내가 업로드한 사진입니다. 아주아주 아름다운 사진입니다. 나는 이 사진에 대해 더 설명하고 싶습니다.",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: Sizes.size16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Gaps.v2,
-                  DefaultTextStyle(
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 14,
-                          backgroundImage: AssetImage(
-                            "assets/images/myFace.PNG",
-                          ),
-                        ),
-                        Gaps.h4,
-                        Expanded(
-                          child: Text(
-                            "My Nick Name is very Long",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Gaps.h4,
-                        FaIcon(
-                          FontAwesomeIcons.heart,
+                    Gaps.v2,
+                    if (constraints.maxWidth > 200)
+                      DefaultTextStyle(
+                        style: TextStyle(
                           color: Colors.grey.shade600,
-                          size: Sizes.size16,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Gaps.h2,
-                        Text("2.5M"),
-                      ],
-                    ),
-                  ),
-                ],
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundImage: AssetImage(
+                                "assets/images/myFace.PNG",
+                              ),
+                            ),
+                            Gaps.h4,
+                            Expanded(
+                              child: Text(
+                                "My Nick Name is very Long",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Gaps.h4,
+                            FaIcon(
+                              FontAwesomeIcons.heart,
+                              color: Colors.grey.shade600,
+                              size: Sizes.size16,
+                            ),
+                            Gaps.h2,
+                            Text("2.5M"),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
 
