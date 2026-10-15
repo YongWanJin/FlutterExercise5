@@ -33,6 +33,7 @@ class _VideoPostState extends State<VideoPost>
       VideoPlayerController.asset("assets/videos/e.mp4");
 
   bool _isPaused = false;
+  bool _isMuted = false;
 
   late final AnimationController _animationController;
   // Flutter의 애니메이션은 변화가 일어날때마다 화면을 다시 build하는 방식으로 구현된다.
@@ -53,8 +54,28 @@ class _VideoPostState extends State<VideoPost>
   void _initViedoPlayer() async {
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      setState(() {
+        _isMuted = true;
+      });
+    }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
+  }
+
+  void _onVolumePressed() async {
+    if (_isMuted) {
+      setState(() {
+        _isMuted = false;
+      });
+      await _videoPlayerController.setVolume(0.5);
+    } else {
+      setState(() {
+        _isMuted = true;
+      });
+      await _videoPlayerController.setVolume(0);
+    }
   }
 
   @override
@@ -187,6 +208,16 @@ class _VideoPostState extends State<VideoPost>
             right: 10,
             child: Column(
               children: [
+                IconButton(
+                  onPressed: _onVolumePressed,
+                  icon: FaIcon(
+                    _isMuted
+                        ? FontAwesomeIcons.volumeXmark
+                        : FontAwesomeIcons.volume,
+                    color: Colors.white,
+                  ),
+                ),
+                Gaps.v16,
                 CircleAvatar(
                   radius: 27,
                   backgroundColor: Colors.white,
