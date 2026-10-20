@@ -5,21 +5,45 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
+import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = "/";
+
   const SignUpScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
-    // print("_onLoginTap 호출");
+  void _onLoginTap(BuildContext context) async {
+    Navigator.of(context).pushNamed(LoginScreen.routeName);
   }
 
   void _onEamilTap(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => UsernameScreen()));
-    // print("_onEamilTap 호출");
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
   }
+
+  // void _onEamilTap(BuildContext context) {
+  //   Navigator.of(context).push(
+  //     PageRouteBuilder(
+  //       transitionDuration: Duration(seconds: 1),
+  //       reverseTransitionDuration: Duration(seconds: 1),
+  //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+  //         final offsetAnimation = Tween(
+  //           begin: Offset(0, -1),
+  //           end: Offset.zero,
+  //         ).animate(animation);
+  //         final opacityAnimation = Tween(
+  //           begin: 0.5,
+  //           end: 1.0,
+  //         ).animate(animation);
+  //         return SlideTransition(
+  //           position: offsetAnimation,
+  //           child: FadeTransition(opacity: opacityAnimation, child: child),
+  //         );
+  //       },
+  //       pageBuilder: (context, animation, secondaryAnimation) =>
+  //           UsernameScreen(),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +69,9 @@ class SignUpScreen extends StatelessWidget {
                     "Create a profile, follow other accounts, make your own videos, and more.",
                     style: TextStyle(
                       fontSize: Sizes.size16,
-                      color: Colors.black45,
+                      color: isDarkMode(context)
+                          ? Colors.grey.shade300
+                          : Colors.black45,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -102,7 +128,6 @@ class SignUpScreen extends StatelessWidget {
             ),
             // 하단 바 내용물
             child: BottomAppBar(
-              color: Colors.grey.shade100,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
                 child: Row(

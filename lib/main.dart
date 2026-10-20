@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/new_navigation_screen.dart';
 import 'package:tiktok_clone/features/onbording/interests_screen.dart';
@@ -24,7 +27,9 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TikTok Clone',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
+        brightness: Brightness.light,
         primaryColor: Color(0xFFE9435A),
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: TextSelectionThemeData(
@@ -41,10 +46,24 @@ class TikTokApp extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        bottomAppBarTheme: BottomAppBarThemeData(color: Colors.grey.shade100),
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Color(0xFFE9435A),
+        scaffoldBackgroundColor: Colors.black,
+        bottomAppBarTheme: BottomAppBarThemeData(color: Colors.grey.shade900),
+      ),
+      initialRoute: SignUpScreen.routeName,
+      routes: {
+        SignUpScreen.routeName: (context) => SignUpScreen(),
+        UsernameScreen.routeName: (context) => UsernameScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        EmailScreen.routeName: (context) => EmailScreen(),
+      },
       // home: SignUpScreen(),
       // home: InterestsScreen(),
-      home: MainNavigationScreen(),
+      // home: MainNavigationScreen(),
       // home: ActivityScreen(),
     );
   }
