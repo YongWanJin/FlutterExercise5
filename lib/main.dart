@@ -8,6 +8,7 @@ import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/new_navigation_screen.dart';
 import 'package:tiktok_clone/features/onbording/interests_screen.dart';
+import 'package:tiktok_clone/router.dart';
 
 void main() async {
   // 앱의 화면 방향 고정
@@ -25,7 +26,8 @@ class TikTokApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'TikTok Clone',
       themeMode: ThemeMode.system,
       theme: ThemeData(
@@ -54,13 +56,7 @@ class TikTokApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         bottomAppBarTheme: BottomAppBarThemeData(color: Colors.grey.shade900),
       ),
-      initialRoute: SignUpScreen.routeName,
-      routes: {
-        SignUpScreen.routeName: (context) => SignUpScreen(),
-        UsernameScreen.routeName: (context) => UsernameScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
-        EmailScreen.routeName: (context) => EmailScreen(),
-      },
+
       // home: SignUpScreen(),
       // home: InterestsScreen(),
       // home: MainNavigationScreen(),
